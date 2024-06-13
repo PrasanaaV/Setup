@@ -1,5 +1,0 @@
-[2024-06-06T12:20:07.890+0000] {processor.py:157} INFO - Started process (PID=261) to work on /opt/airflow/dags/stations_functions copy.py
-[2024-06-06T12:20:07.891+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/stations_functions copy.py for tasks to queue
-[2024-06-06T12:20:07.893+0000] {logging_mixin.py:151} INFO - [2024-06-06T12:20:07.893+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/stations_functions copy.py
-[2024-06-06T12:20:07.997+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/stations_functions copy.py
-[2024-06-06T12:20:08.004+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/stations_functions copy.py took 0.118 seconds
