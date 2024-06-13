@@ -1,0 +1,30 @@
+[2024-06-06T12:32:43.345+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_python_dag.elastic_metro_station manual__2024-06-06T12:15:32.797299+00:00 [queued]>
+[2024-06-06T12:32:43.425+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_python_dag.elastic_metro_station manual__2024-06-06T12:15:32.797299+00:00 [queued]>
+[2024-06-06T12:32:43.425+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2024-06-06T12:32:43.431+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): elastic_metro_station> on 2024-06-06 12:15:32.797299+00:00
+[2024-06-06T12:32:43.433+0000] {standard_task_runner.py:57} INFO - Started process 444 to run task
+[2024-06-06T12:32:43.436+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'my_python_dag', 'elastic_metro_station', 'manual__2024-06-06T12:15:32.797299+00:00', '--job-id', '177', '--raw', '--subdir', 'DAGS_FOLDER/fetch_from_data_sources.py', '--cfg-path', '/tmp/tmp1jwxf2u7']
+[2024-06-06T12:32:43.438+0000] {standard_task_runner.py:85} INFO - Job 177: Subtask elastic_metro_station
+[2024-06-06T12:32:43.457+0000] {task_command.py:415} INFO - Running <TaskInstance: my_python_dag.elastic_metro_station manual__2024-06-06T12:15:32.797299+00:00 [running]> on host 9e4bf1cd7746
+[2024-06-06T12:32:43.488+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_python_dag' AIRFLOW_CTX_TASK_ID='elastic_metro_station' AIRFLOW_CTX_EXECUTION_DATE='2024-06-06T12:15:32.797299+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-06-06T12:15:32.797299+00:00'
+[2024-06-06T12:32:43.488+0000] {logging_mixin.py:151} INFO - Hello
+[2024-06-06T12:34:02.585+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/metro-station/_doc/concorde [status:403 duration:0.605s]
+[2024-06-06T12:34:02.587+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/stations_functions.py", line 84, in elastic_metro_station
+    client.index(index="metro-station", id=key, body=value)
+  File "/home/airflow/.local/lib/python3.8/site-packages/elasticsearch/_sync/client/utils.py", line 414, in wrapped
+    return api(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/elasticsearch/_sync/client/__init__.py", line 2318, in index
+    return self.perform_request(  # type: ignore[return-value]
+  File "/home/airflow/.local/lib/python3.8/site-packages/elasticsearch/_sync/client/_base.py", line 320, in perform_request
+    raise HTTP_EXCEPTIONS.get(meta.status, ApiError)(
+elasticsearch.AuthorizationException: AuthorizationException(403, 'security_exception', 'action [indices:admin/auto_create] is unauthorized for API key id [pFWH7Y8BJGw5SA1A_LBu] of user [2843630702] on indices [metro-station], this action is granted by the index privileges [auto_configure,create_index,manage,all]')
+[2024-06-06T12:34:02.611+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=my_python_dag, task_id=elastic_metro_station, execution_date=20240606T121532, start_date=20240606T123243, end_date=20240606T123402
+[2024-06-06T12:34:02.626+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 177 for task elastic_metro_station (AuthorizationException(403, 'security_exception', 'action [indices:admin/auto_create] is unauthorized for API key id [pFWH7Y8BJGw5SA1A_LBu] of user [2843630702] on indices [metro-station], this action is granted by the index privileges [auto_configure,create_index,manage,all]'); 444)
+[2024-06-06T12:34:02.648+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2024-06-06T12:34:02.661+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,25 @@
+[2024-06-04T08:55:37.556+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_location_stations manual__2024-06-04T08:50:35.647574+00:00 [queued]>
+[2024-06-04T08:55:37.560+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_location_stations manual__2024-06-04T08:50:35.647574+00:00 [queued]>
+[2024-06-04T08:55:37.560+0000] {taskinstance.py:1359} INFO - Starting attempt 2 of 2
+[2024-06-04T08:55:37.566+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): fetch_and_insert_into_elasticsearch_location_stations> on 2024-06-04 08:50:35.647574+00:00
+[2024-06-04T08:55:37.568+0000] {standard_task_runner.py:57} INFO - Started process 721 to run task
+[2024-06-04T08:55:37.570+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'my_python_dag', 'fetch_and_insert_into_elasticsearch_location_stations', 'manual__2024-06-04T08:50:35.647574+00:00', '--job-id', '49', '--raw', '--subdir', 'DAGS_FOLDER/fetch_from_data_sources.py', '--cfg-path', '/tmp/tmpir53zlvy']
+[2024-06-04T08:55:37.572+0000] {standard_task_runner.py:85} INFO - Job 49: Subtask fetch_and_insert_into_elasticsearch_location_stations
+[2024-06-04T08:55:37.692+0000] {task_command.py:415} INFO - Running <TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_location_stations manual__2024-06-04T08:50:35.647574+00:00 [running]> on host 28f1ec4f9f22
+[2024-06-04T08:55:37.722+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_python_dag' AIRFLOW_CTX_TASK_ID='fetch_and_insert_into_elasticsearch_location_stations' AIRFLOW_CTX_EXECUTION_DATE='2024-06-04T08:50:35.647574+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-06-04T08:50:35.647574+00:00'
+[2024-06-04T08:55:37.723+0000] {logging_mixin.py:151} INFO - Hello from fetch data DAG
+[2024-06-04T08:55:37.723+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/stations_functions.py", line 109, in fetch_and_insert_into_elasticsearch_location_stations
+    content = fetch_data_functions_stations_v2()
+  File "/opt/airflow/dags/stations_functions.py", line 92, in fetch_data_functions_stations_v2
+    with open('./files/emplacement-des-gares-idf.json', 'r') as file:
+FileNotFoundError: [Errno 2] No such file or directory: './files/emplacement-des-gares-idf.json'
+[2024-06-04T08:55:37.727+0000] {taskinstance.py:1398} INFO - Marking task as FAILED. dag_id=my_python_dag, task_id=fetch_and_insert_into_elasticsearch_location_stations, execution_date=20240604T085035, start_date=20240604T085537, end_date=20240604T085537
+[2024-06-04T08:55:37.731+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 49 for task fetch_and_insert_into_elasticsearch_location_stations ([Errno 2] No such file or directory: './files/emplacement-des-gares-idf.json'; 721)
+[2024-06-04T08:55:37.750+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2024-06-04T08:55:37.850+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

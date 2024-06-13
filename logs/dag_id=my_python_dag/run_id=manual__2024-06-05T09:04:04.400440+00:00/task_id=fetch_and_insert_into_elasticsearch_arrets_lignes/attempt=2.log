@@ -1,0 +1,342 @@
+[2024-06-05T09:09:06.891+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_arrets_lignes manual__2024-06-05T09:04:04.400440+00:00 [queued]>
+[2024-06-05T09:09:06.995+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_arrets_lignes manual__2024-06-05T09:04:04.400440+00:00 [queued]>
+[2024-06-05T09:09:06.995+0000] {taskinstance.py:1359} INFO - Starting attempt 2 of 2
+[2024-06-05T09:09:07.000+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): fetch_and_insert_into_elasticsearch_arrets_lignes> on 2024-06-05 09:04:04.400440+00:00
+[2024-06-05T09:09:07.002+0000] {standard_task_runner.py:57} INFO - Started process 1237 to run task
+[2024-06-05T09:09:07.004+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'my_python_dag', 'fetch_and_insert_into_elasticsearch_arrets_lignes', 'manual__2024-06-05T09:04:04.400440+00:00', '--job-id', '165', '--raw', '--subdir', 'DAGS_FOLDER/fetch_from_data_sources.py', '--cfg-path', '/tmp/tmpcm_5uwz5']
+[2024-06-05T09:09:07.006+0000] {standard_task_runner.py:85} INFO - Job 165: Subtask fetch_and_insert_into_elasticsearch_arrets_lignes
+[2024-06-05T09:09:07.025+0000] {task_command.py:415} INFO - Running <TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_arrets_lignes manual__2024-06-05T09:04:04.400440+00:00 [running]> on host 9e4bf1cd7746
+[2024-06-05T09:09:07.055+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_python_dag' AIRFLOW_CTX_TASK_ID='fetch_and_insert_into_elasticsearch_arrets_lignes' AIRFLOW_CTX_EXECUTION_DATE='2024-06-05T09:04:04.400440+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-06-05T09:04:04.400440+00:00'
+[2024-06-05T09:09:07.056+0000] {logging_mixin.py:151} INFO - Hello from fetch data DAG
+[2024-06-05T09:09:08.301+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/618_IDFM%3A19593 [status:200 duration:0.376s]
+[2024-06-05T09:09:08.425+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/618_IDFM%3A19335 [status:200 duration:0.120s]
+[2024-06-05T09:09:08.552+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/618_IDFM%3A486780 [status:200 duration:0.120s]
+[2024-06-05T09:09:08.678+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/618_IDFM%3A427695 [status:200 duration:0.117s]
+[2024-06-05T09:09:08.802+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/619_IDFM%3A488053 [status:200 duration:0.117s]
+[2024-06-05T09:09:08.930+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/619_IDFM%3A462404 [status:200 duration:0.121s]
+[2024-06-05T09:09:09.050+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/619_IDFM%3A38110 [status:200 duration:0.117s]
+[2024-06-05T09:09:09.171+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/619_IDFM%3A19036 [status:200 duration:0.116s]
+[2024-06-05T09:09:09.291+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/619_IDFM%3A38171 [status:200 duration:0.117s]
+[2024-06-05T09:09:09.410+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/619_IDFM%3A38172 [status:200 duration:0.115s]
+[2024-06-05T09:09:09.530+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/619_IDFM%3A488061 [status:200 duration:0.115s]
+[2024-06-05T09:09:09.646+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/620_IDFM%3A483662 [status:200 duration:0.114s]
+[2024-06-05T09:09:09.876+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/620_IDFM%3A427643 [status:200 duration:0.228s]
+[2024-06-05T09:09:10.001+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/620_IDFM%3A19319 [status:200 duration:0.116s]
+[2024-06-05T09:09:10.119+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/620_IDFM%3A477153 [status:200 duration:0.116s]
+[2024-06-05T09:09:10.237+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/620_IDFM%3A19125 [status:200 duration:0.115s]
+[2024-06-05T09:09:10.358+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/620_IDFM%3A19609 [status:200 duration:0.119s]
+[2024-06-05T09:09:10.473+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/620_IDFM%3A18986 [status:200 duration:0.114s]
+[2024-06-05T09:09:10.589+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/623_IDFM%3A486165 [status:200 duration:0.113s]
+[2024-06-05T09:09:10.780+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/623_IDFM%3A19255 [status:200 duration:0.189s]
+[2024-06-05T09:09:10.903+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/623_IDFM%3A19066 [status:200 duration:0.118s]
+[2024-06-05T09:09:11.025+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/623_IDFM%3A24243 [status:200 duration:0.116s]
+[2024-06-05T09:09:11.143+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/623_IDFM%3A19323 [status:200 duration:0.115s]
+[2024-06-05T09:09:11.259+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/623_IDFM%3A19282 [status:200 duration:0.114s]
+[2024-06-05T09:09:11.379+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/623_IDFM%3A18880 [status:200 duration:0.117s]
+[2024-06-05T09:09:11.503+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/623_IDFM%3A462938 [status:200 duration:0.117s]
+[2024-06-05T09:09:11.620+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/623_IDFM%3A491504 [status:200 duration:0.115s]
+[2024-06-05T09:09:11.737+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/623_IDFM%3A19604 [status:200 duration:0.115s]
+[2024-06-05T09:09:11.858+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/623_IDFM%3A13069 [status:200 duration:0.118s]
+[2024-06-05T09:09:11.980+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/623_IDFM%3A19352 [status:200 duration:0.116s]
+[2024-06-05T09:09:12.101+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/637_IDFM%3A18810 [status:200 duration:0.116s]
+[2024-06-05T09:09:12.217+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A39204 [status:200 duration:0.113s]
+[2024-06-05T09:09:12.335+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A18865 [status:200 duration:0.115s]
+[2024-06-05T09:09:12.452+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A38180 [status:200 duration:0.114s]
+[2024-06-05T09:09:12.568+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A19017 [status:200 duration:0.115s]
+[2024-06-05T09:09:12.684+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A15096 [status:200 duration:0.114s]
+[2024-06-05T09:09:12.801+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A19176 [status:200 duration:0.115s]
+[2024-06-05T09:09:12.926+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A18992 [status:200 duration:0.118s]
+[2024-06-05T09:09:13.049+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A18984 [status:200 duration:0.116s]
+[2024-06-05T09:09:13.172+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A40722 [status:200 duration:0.116s]
+[2024-06-05T09:09:13.293+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A18948 [status:200 duration:0.115s]
+[2024-06-05T09:09:13.417+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A18973 [status:200 duration:0.117s]
+[2024-06-05T09:09:13.539+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A19501 [status:200 duration:0.115s]
+[2024-06-05T09:09:13.655+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A19200 [status:200 duration:0.115s]
+[2024-06-05T09:09:13.776+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A12996 [status:200 duration:0.118s]
+[2024-06-05T09:09:13.895+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A19532 [status:200 duration:0.116s]
+[2024-06-05T09:09:14.020+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/642_IDFM%3A18817 [status:200 duration:0.117s]
+[2024-06-05T09:09:14.138+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/644_IDFM%3A18817 [status:200 duration:0.115s]
+[2024-06-05T09:09:14.266+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/644_IDFM%3A19452 [status:200 duration:0.117s]
+[2024-06-05T09:09:14.384+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/644_IDFM%3A19333 [status:200 duration:0.114s]
+[2024-06-05T09:09:14.501+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/644_IDFM%3A18937 [status:200 duration:0.116s]
+[2024-06-05T09:09:14.616+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/644_IDFM%3A29922 [status:200 duration:0.113s]
+[2024-06-05T09:09:14.737+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/644_IDFM%3A29920 [status:200 duration:0.120s]
+[2024-06-05T09:09:14.859+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/644_IDFM%3A19464 [status:200 duration:0.113s]
+[2024-06-05T09:09:14.974+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/644_IDFM%3A19303 [status:200 duration:0.113s]
+[2024-06-05T09:09:15.092+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/644_IDFM%3A15106 [status:200 duration:0.116s]
+[2024-06-05T09:09:15.208+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/644_IDFM%3A427659 [status:200 duration:0.114s]
+[2024-06-05T09:09:15.328+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/C_IDFM%3A18010 [status:200 duration:0.117s]
+[2024-06-05T09:09:15.445+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/C_IDFM%3A17898 [status:200 duration:0.115s]
+[2024-06-05T09:09:15.561+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/C_IDFM%3A19921 [status:200 duration:0.114s]
+[2024-06-05T09:09:15.678+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/C_IDFM%3A39785 [status:200 duration:0.115s]
+[2024-06-05T09:09:15.797+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/C_IDFM%3A18004 [status:200 duration:0.117s]
+[2024-06-05T09:09:15.919+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/C_IDFM%3A17925 [status:200 duration:0.114s]
+[2024-06-05T09:09:16.038+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/C_IDFM%3A17917 [status:200 duration:0.115s]
+[2024-06-05T09:09:16.155+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/C_IDFM%3A17905 [status:200 duration:0.115s]
+[2024-06-05T09:09:16.274+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A18670 [status:200 duration:0.115s]
+[2024-06-05T09:09:16.393+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A17927 [status:200 duration:0.116s]
+[2024-06-05T09:09:16.512+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A18026 [status:200 duration:0.118s]
+[2024-06-05T09:09:16.632+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A17914 [status:200 duration:0.117s]
+[2024-06-05T09:09:16.746+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A17835 [status:200 duration:0.113s]
+[2024-06-05T09:09:16.862+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A18684 [status:200 duration:0.114s]
+[2024-06-05T09:09:16.978+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A17864 [status:200 duration:0.113s]
+[2024-06-05T09:09:17.076+0000] {job.py:219} ERROR - Job heartbeat got an exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/impl.py", line 256, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 691, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "postgres" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/jobs/job.py", line 190, in heartbeat
+    session.merge(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3056, in merge
+    return self._merge(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3136, in _merge
+    merged = self.get(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2853, in get
+    return self._get_impl(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2975, in _get_impl
+    return db_load_fn(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/loading.py", line 530, in load_on_pk_identity
+    session.execute(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1716, in execute
+    conn = self._connection_for_bind(bind)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1555, in _connection_for_bind
+    return self._transaction._connection_for_bind(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 750, in _connection_for_bind
+    conn = bind.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/future/engine.py", line 406, in connect
+    return super(Engine, self).connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2208, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/impl.py", line 256, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 691, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "postgres" to address: Name or service not known
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2024-06-05T09:09:17.095+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A17890 [status:200 duration:0.114s]
+[2024-06-05T09:09:17.212+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A18664 [status:200 duration:0.116s]
+[2024-06-05T09:09:17.329+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A17905 [status:200 duration:0.115s]
+[2024-06-05T09:09:17.446+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A18010 [status:200 duration:0.114s]
+[2024-06-05T09:09:17.568+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A17920 [status:200 duration:0.118s]
+[2024-06-05T09:09:17.689+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A417714 [status:200 duration:0.115s]
+[2024-06-05T09:09:17.815+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A17990 [status:200 duration:0.117s]
+[2024-06-05T09:09:17.938+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A17922 [status:200 duration:0.117s]
+[2024-06-05T09:09:18.059+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/D_IDFM%3A488026 [status:200 duration:0.115s]
+[2024-06-05T09:09:18.180+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/E_IDFM%3A417702 [status:200 duration:0.117s]
+[2024-06-05T09:09:18.316+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/E_IDFM%3A18008 [status:200 duration:0.126s]
+[2024-06-05T09:09:18.440+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/E_IDFM%3A18635 [status:200 duration:0.116s]
+[2024-06-05T09:09:18.562+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/E_IDFM%3A17922 [status:200 duration:0.114s]
+[2024-06-05T09:09:18.687+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/E_IDFM%3A417698 [status:200 duration:0.117s]
+[2024-06-05T09:09:18.813+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/E_IDFM%3A17981 [status:200 duration:0.117s]
+[2024-06-05T09:09:18.939+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/I_IDFM%3A17910 [status:200 duration:0.117s]
+[2024-06-05T09:09:19.063+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/I_IDFM%3A17844 [status:200 duration:0.117s]
+[2024-06-05T09:09:19.187+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/I_IDFM%3A17947 [status:200 duration:0.117s]
+[2024-06-05T09:09:19.313+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/I_IDFM%3A18001 [status:200 duration:0.118s]
+[2024-06-05T09:09:19.435+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/I_IDFM%3A417709 [status:200 duration:0.116s]
+[2024-06-05T09:09:19.557+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/I_IDFM%3A17975 [status:200 duration:0.118s]
+[2024-06-05T09:09:19.684+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/I_IDFM%3A417695 [status:200 duration:0.118s]
+[2024-06-05T09:09:19.810+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/I_IDFM%3A18686 [status:200 duration:0.116s]
+[2024-06-05T09:09:19.934+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/Z_IDFM%3A17868 [status:200 duration:0.115s]
+[2024-06-05T09:09:20.056+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/Z_IDFM%3A17889 [status:200 duration:0.116s]
+[2024-06-05T09:09:20.181+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/Z_IDFM%3A417764 [status:200 duration:0.118s]
+[2024-06-05T09:09:20.303+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/Z_IDFM%3A21670 [status:200 duration:0.115s]
+[2024-06-05T09:09:20.426+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/Z_IDFM%3A417771 [status:200 duration:0.117s]
+[2024-06-05T09:09:20.548+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/Z_IDFM%3A17867 [status:200 duration:0.115s]
+[2024-06-05T09:09:20.671+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/Z_IDFM%3A17980 [status:200 duration:0.115s]
+[2024-06-05T09:09:20.795+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A423367 [status:200 duration:0.118s]
+[2024-06-05T09:09:20.923+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A18425 [status:200 duration:0.118s]
+[2024-06-05T09:09:21.045+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A18414 [status:200 duration:0.117s]
+[2024-06-05T09:09:21.167+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A18612 [status:200 duration:0.117s]
+[2024-06-05T09:09:21.289+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A477908 [status:200 duration:0.115s]
+[2024-06-05T09:09:21.412+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A12456 [status:200 duration:0.117s]
+[2024-06-05T09:09:21.541+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A17955 [status:200 duration:0.123s]
+[2024-06-05T09:09:21.684+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A423377 [status:200 duration:0.139s]
+[2024-06-05T09:09:21.811+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A12445 [status:200 duration:0.118s]
+[2024-06-05T09:09:21.939+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A17885 [status:200 duration:0.121s]
+[2024-06-05T09:09:22.062+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A17864 [status:200 duration:0.116s]
+[2024-06-05T09:09:22.118+0000] {job.py:219} ERROR - Job heartbeat got an exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/impl.py", line 256, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 691, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "postgres" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/jobs/job.py", line 190, in heartbeat
+    session.merge(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3056, in merge
+    return self._merge(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3136, in _merge
+    merged = self.get(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2853, in get
+    return self._get_impl(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2975, in _get_impl
+    return db_load_fn(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/loading.py", line 530, in load_on_pk_identity
+    session.execute(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1716, in execute
+    conn = self._connection_for_bind(bind)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1555, in _connection_for_bind
+    return self._transaction._connection_for_bind(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 750, in _connection_for_bind
+    conn = bind.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/future/engine.py", line 406, in connect
+    return super(Engine, self).connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2208, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/impl.py", line 256, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 691, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "postgres" to address: Name or service not known
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2024-06-05T09:09:22.184+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A417691 [status:200 duration:0.116s]
+[2024-06-05T09:09:22.307+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A17968 [status:200 duration:0.117s]
+[2024-06-05T09:09:22.427+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A417740 [status:200 duration:0.116s]
+[2024-06-05T09:09:22.549+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A423327 [status:200 duration:0.116s]
+[2024-06-05T09:09:22.672+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A17956 [status:200 duration:0.116s]
+[2024-06-05T09:09:22.796+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A416974 [status:200 duration:0.117s]
+[2024-06-05T09:09:22.915+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A13864 [status:200 duration:0.115s]
+[2024-06-05T09:09:23.035+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/K_IDFM%3A18427 [status:200 duration:0.115s]
+[2024-06-05T09:09:23.155+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/M_IDFM%3A29182 [status:200 duration:0.115s]
+[2024-06-05T09:09:23.278+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/M_IDFM%3A5760 [status:200 duration:0.116s]
+[2024-06-05T09:09:23.398+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/M_IDFM%3A419257 [status:200 duration:0.114s]
+[2024-06-05T09:09:23.521+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/M_IDFM%3A41734 [status:200 duration:0.117s]
+[2024-06-05T09:09:23.647+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/N_IDFM%3A480901 [status:200 duration:0.118s]
+[2024-06-05T09:09:23.768+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/N_IDFM%3A424533 [status:200 duration:0.116s]
+[2024-06-05T09:09:23.888+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/N_IDFM%3A417685 [status:200 duration:0.116s]
+[2024-06-05T09:09:24.013+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/N_IDFM%3A18029 [status:200 duration:0.119s]
+[2024-06-05T09:09:24.136+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/N_IDFM%3A19977 [status:200 duration:0.117s]
+[2024-06-05T09:09:24.258+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/N_IDFM%3A19969 [status:200 duration:0.115s]
+[2024-06-05T09:09:24.381+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/X_IDFM%3A17894 [status:200 duration:0.118s]
+[2024-06-05T09:09:24.505+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/F_IDFM%3A19981 [status:200 duration:0.118s]
+[2024-06-05T09:09:24.629+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/F_IDFM%3A19924 [status:200 duration:0.118s]

@@ -1,0 +1,25 @@
+[2024-06-04T10:42:20.978+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_emplacement_stations manual__2024-06-04T10:37:18.537113+00:00 [queued]>
+[2024-06-04T10:42:20.984+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_emplacement_stations manual__2024-06-04T10:37:18.537113+00:00 [queued]>
+[2024-06-04T10:42:20.984+0000] {taskinstance.py:1359} INFO - Starting attempt 2 of 2
+[2024-06-04T10:42:21.174+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): fetch_and_insert_into_elasticsearch_emplacement_stations> on 2024-06-04 10:37:18.537113+00:00
+[2024-06-04T10:42:21.181+0000] {standard_task_runner.py:57} INFO - Started process 703 to run task
+[2024-06-04T10:42:21.185+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'my_python_dag', 'fetch_and_insert_into_elasticsearch_emplacement_stations', 'manual__2024-06-04T10:37:18.537113+00:00', '--job-id', '102', '--raw', '--subdir', 'DAGS_FOLDER/fetch_from_data_sources.py', '--cfg-path', '/tmp/tmpud8yalnc']
+[2024-06-04T10:42:21.190+0000] {standard_task_runner.py:85} INFO - Job 102: Subtask fetch_and_insert_into_elasticsearch_emplacement_stations
+[2024-06-04T10:42:21.251+0000] {task_command.py:415} INFO - Running <TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_emplacement_stations manual__2024-06-04T10:37:18.537113+00:00 [running]> on host 9e4bf1cd7746
+[2024-06-04T10:42:21.301+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_python_dag' AIRFLOW_CTX_TASK_ID='fetch_and_insert_into_elasticsearch_emplacement_stations' AIRFLOW_CTX_EXECUTION_DATE='2024-06-04T10:37:18.537113+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-06-04T10:37:18.537113+00:00'
+[2024-06-04T10:42:21.302+0000] {logging_mixin.py:151} INFO - Fetching data from JSON
+[2024-06-04T10:42:21.319+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/stations_functions.py", line 120, in fetch_and_insert_into_elasticsearch_emplacement_stations
+    insert_into_elasticsearch(content)
+  File "/opt/airflow/dags/stations_functions.py", line 104, in insert_into_elasticsearch
+    client = Elasticsearch(
+TypeError: __init__() got an unexpected keyword argument 'scheme'
+[2024-06-04T10:42:21.325+0000] {taskinstance.py:1398} INFO - Marking task as FAILED. dag_id=my_python_dag, task_id=fetch_and_insert_into_elasticsearch_emplacement_stations, execution_date=20240604T103718, start_date=20240604T104220, end_date=20240604T104221
+[2024-06-04T10:42:21.330+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 102 for task fetch_and_insert_into_elasticsearch_emplacement_stations (__init__() got an unexpected keyword argument 'scheme'; 703)
+[2024-06-04T10:42:21.367+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2024-06-04T10:42:21.375+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

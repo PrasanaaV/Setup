@@ -1,0 +1,33 @@
+[2024-06-04T10:36:43.400+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_emplacement_stations manual__2024-06-04T10:36:42.165110+00:00 [queued]>
+[2024-06-04T10:36:43.405+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_emplacement_stations manual__2024-06-04T10:36:42.165110+00:00 [queued]>
+[2024-06-04T10:36:43.405+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2024-06-04T10:36:43.539+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): fetch_and_insert_into_elasticsearch_emplacement_stations> on 2024-06-04 10:36:42.165110+00:00
+[2024-06-04T10:36:43.545+0000] {standard_task_runner.py:57} INFO - Started process 607 to run task
+[2024-06-04T10:36:43.548+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'my_python_dag', 'fetch_and_insert_into_elasticsearch_emplacement_stations', 'manual__2024-06-04T10:36:42.165110+00:00', '--job-id', '97', '--raw', '--subdir', 'DAGS_FOLDER/fetch_from_data_sources.py', '--cfg-path', '/tmp/tmpz18sxyu3']
+[2024-06-04T10:36:43.550+0000] {standard_task_runner.py:85} INFO - Job 97: Subtask fetch_and_insert_into_elasticsearch_emplacement_stations
+[2024-06-04T10:36:43.579+0000] {task_command.py:415} INFO - Running <TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_emplacement_stations manual__2024-06-04T10:36:42.165110+00:00 [running]> on host 9e4bf1cd7746
+[2024-06-04T10:36:43.619+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_python_dag' AIRFLOW_CTX_TASK_ID='fetch_and_insert_into_elasticsearch_emplacement_stations' AIRFLOW_CTX_EXECUTION_DATE='2024-06-04T10:36:42.165110+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-06-04T10:36:42.165110+00:00'
+[2024-06-04T10:36:43.620+0000] {logging_mixin.py:151} INFO - Fetching data from JSON
+[2024-06-04T10:36:43.640+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/stations_functions.py", line 117, in fetch_and_insert_into_elasticsearch_emplacement_stations
+    insert_into_elasticsearch(content)
+  File "/opt/airflow/dags/stations_functions.py", line 104, in insert_into_elasticsearch
+    client = Elasticsearch(
+  File "/home/airflow/.local/lib/python3.8/site-packages/elasticsearch/_sync/client/__init__.py", line 331, in __init__
+    node_configs = client_node_configs(
+  File "/home/airflow/.local/lib/python3.8/site-packages/elasticsearch/_sync/client/utils.py", line 105, in client_node_configs
+    node_configs = hosts_to_node_configs(hosts)
+  File "/home/airflow/.local/lib/python3.8/site-packages/elasticsearch/_sync/client/utils.py", line 154, in hosts_to_node_configs
+    node_configs.append(host_mapping_to_node_config(host))
+  File "/home/airflow/.local/lib/python3.8/site-packages/elasticsearch/_sync/client/utils.py", line 178, in host_mapping_to_node_config
+    raise ValueError(
+ValueError: Can't specify the options 'api_key' via a dictionary in 'hosts', only 'host', 'path_prefix', 'port', 'scheme', 'url_prefix', 'use_ssl' options are allowed
+[2024-06-04T10:36:43.647+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=my_python_dag, task_id=fetch_and_insert_into_elasticsearch_emplacement_stations, execution_date=20240604T103642, start_date=20240604T103643, end_date=20240604T103643
+[2024-06-04T10:36:43.657+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 97 for task fetch_and_insert_into_elasticsearch_emplacement_stations (Can't specify the options 'api_key' via a dictionary in 'hosts', only 'host', 'path_prefix', 'port', 'scheme', 'url_prefix', 'use_ssl' options are allowed; 607)
+[2024-06-04T10:36:43.688+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2024-06-04T10:36:43.698+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,3 @@
+confluent-kafka
+kafka-python-ng
+kafka-python

@@ -1,0 +1,32 @@
+[2024-06-05T09:05:26.073+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_arrets_lignes manual__2024-06-05T09:05:24.702727+00:00 [queued]>
+[2024-06-05T09:05:26.081+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_arrets_lignes manual__2024-06-05T09:05:24.702727+00:00 [queued]>
+[2024-06-05T09:05:26.081+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2024-06-05T09:05:26.186+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): fetch_and_insert_into_elasticsearch_arrets_lignes> on 2024-06-05 09:05:24.702727+00:00
+[2024-06-05T09:05:26.189+0000] {standard_task_runner.py:57} INFO - Started process 1170 to run task
+[2024-06-05T09:05:26.191+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'my_python_dag', 'fetch_and_insert_into_elasticsearch_arrets_lignes', 'manual__2024-06-05T09:05:24.702727+00:00', '--job-id', '162', '--raw', '--subdir', 'DAGS_FOLDER/fetch_from_data_sources.py', '--cfg-path', '/tmp/tmpeeifdzq7']
+[2024-06-05T09:05:26.193+0000] {standard_task_runner.py:85} INFO - Job 162: Subtask fetch_and_insert_into_elasticsearch_arrets_lignes
+[2024-06-05T09:05:26.214+0000] {task_command.py:415} INFO - Running <TaskInstance: my_python_dag.fetch_and_insert_into_elasticsearch_arrets_lignes manual__2024-06-05T09:05:24.702727+00:00 [running]> on host 9e4bf1cd7746
+[2024-06-05T09:05:26.248+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_python_dag' AIRFLOW_CTX_TASK_ID='fetch_and_insert_into_elasticsearch_arrets_lignes' AIRFLOW_CTX_EXECUTION_DATE='2024-06-05T09:05:24.702727+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-06-05T09:05:24.702727+00:00'
+[2024-06-05T09:05:26.249+0000] {logging_mixin.py:151} INFO - Hello from fetch data DAG
+[2024-06-05T09:05:27.485+0000] {_transport.py:336} INFO - PUT https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443/stop-lines/_doc/618_IDFM%3A19593 [status:403 duration:0.370s]
+[2024-06-05T09:05:27.487+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/stations_functions.py", line 148, in fetch_and_insert_into_elasticsearch_arrets_lignes
+    insert_into_elasticsearch_stop_lines(content)
+  File "/opt/airflow/dags/stations_functions.py", line 142, in insert_into_elasticsearch_stop_lines
+    client.index(index="stop-lines", id=unique_id, body=item)
+  File "/home/airflow/.local/lib/python3.8/site-packages/elasticsearch/_sync/client/utils.py", line 414, in wrapped
+    return api(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/elasticsearch/_sync/client/__init__.py", line 2318, in index
+    return self.perform_request(  # type: ignore[return-value]
+  File "/home/airflow/.local/lib/python3.8/site-packages/elasticsearch/_sync/client/_base.py", line 320, in perform_request
+    raise HTTP_EXCEPTIONS.get(meta.status, ApiError)(
+elasticsearch.AuthorizationException: AuthorizationException(403, 'security_exception', 'action [indices:data/write/bulk[s]] is unauthorized for API key id [nFVn548BJGw5SA1AbLAw] of user [2843630702] on indices [stop-lines], this action is granted by the index privileges [create_doc,create,delete,index,write,all]')
+[2024-06-05T09:05:27.493+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=my_python_dag, task_id=fetch_and_insert_into_elasticsearch_arrets_lignes, execution_date=20240605T090524, start_date=20240605T090526, end_date=20240605T090527
+[2024-06-05T09:05:27.500+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 162 for task fetch_and_insert_into_elasticsearch_arrets_lignes (AuthorizationException(403, 'security_exception', 'action [indices:data/write/bulk[s]] is unauthorized for API key id [nFVn548BJGw5SA1AbLAw] of user [2843630702] on indices [stop-lines], this action is granted by the index privileges [create_doc,create,delete,index,write,all]'); 1170)
+[2024-06-05T09:05:27.512+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2024-06-05T09:05:27.522+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

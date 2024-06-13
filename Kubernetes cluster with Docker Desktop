@@ -1,0 +1,60 @@
+Kubernetes cluster with Docker Desktop
+
+Installation : 
+	-- Airflow (Helm) : custom image that maps the host file system to the container file system so we have dags inside the container
+	-- Kafka (Helm) : default setup
+	-- MongoDB (Operator with default setup) because it is tough to manage Mongo itself because it is a StatefulSet 
+
+Getting data : 
+	-- https://www.sortiesdumetro.fr/search.php (recursion scrapping to get maps, station and exits from all stations from all metros and some RER)
+
+Ariflow : 
+	-- 3 DAGS (having 1 DAG is easier to manage but having 3 DAGS give us more flexibility : the schedule time are not linked, sortiesdumetro will not change frequently so we check every 2 weeks, for monuments/events we check every 3 days, for MobilitéIleDeFrance we check every minute)
+
+		1 DAG for retriving data from MobilitéIleDeFrance API
+		1 DAG for retriving data from sortiesdumetro
+		1 DAG for retriving data about monuments/events
+
+MongoDB : 
+	-- Can stock JSON Document, is very fast for read operations so it is what we want
+
+Kafka : 
+	-- Producer : Airflow
+	-- Consumer : Spark
+
+We decide to not use Cloud Services because it is expensive expecialy for Kubernetes Services / Big Data Services
+
+We can use MongoExpress for a UI for MongoDB ... 
+
+Commands :
+	kubectl exec -it mongo-shell -- mongosh
+	show databases = show dbs
+
+-- mongo
+kubectl exec -it mongo-shell -- mongosh
+show databases = show dbs
+use appdb
+
+-- spark
+Create session : spark=SparkSession.builder.appName('Practice').getOrCreate()
+
+-- Airflow
+docker build --tag my-dags:0.0.1 .
+.\helm repo update
+.\helm upgrade airflow apache-airflow/airflow --set images.airflow.repository=my-dags --set images.airflow.tag=0.0.1
+
+-- Kafka
+
+kubectl exec -it <kafka-pod> -- /bin/bash
+kafka-consumer-groups --bootstrap-server kafka-service:9092 --version => 2.8.1
+kafka-topics --create --topic metro_station --bootstrap-server localhost:29092 --replication-factor 1 --partitions 1
+kafka-topics --list --bootstrap-server localhost:29092
+kafka-console-producer --topic metro_station --bootstrap-server localhost:9092
+kafka-console-consumer --topic metro_station --bootstrap-server localhost:9092 --from-beginning
+
+airflow db init
+
+airflow
+airflow
+
+kafka1 19092
