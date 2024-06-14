@@ -1,7 +1,7 @@
 from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from stations_functions import kafka_fct, fetch_and_insert_into_elasticsearch_emplacement_stations, fetch_and_insert_into_elasticsearch_perim, elastic_metro_station
+from stations_functions import fetch_and_insert_into_elasticsearch_emplacement_stations, fetch_and_insert_into_elasticsearch_perim, elastic_metro_station
 # Define the default arguments for the DAG
 default_args = {
     'owner': 'airflow',

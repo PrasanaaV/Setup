@@ -376,23 +376,27 @@ services:
   
   ##
 
-  # spark-master:
-  #   image: bitnami/spark:latest
-  #   container_name: spark-master
-  #   ports:
-  #     - "8080:8080"
-  #     - "7077:7077"
-  #   environment:
-  #     - SPARK_MODE=master
+  spark-master:
+    image: bitnami/spark:latest
+    container_name: spark-master
+    ports:
+      - "7077:7077"
+      - "8090:8090"
+    environment:
+      - SPARK_MODE=master
+    networks:
+      - airflow-kafka
 
-  # spark-worker:
-  #   image: bitnami/spark:latest
-  #   container_name: spark-worker
-  #   depends_on:
-  #     - spark-master
-  #   environment:
-  #     - SPARK_MODE=worker
-  #     - SPARK_MASTER_URL=spark://spark-master:7077
+  spark-worker:
+    image: bitnami/spark:latest
+    container_name: spark-worker
+    depends_on:
+      - spark-master
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    networks:
+      - airflow-kafka
 
 volumes:
   postgres-db-volume:
