@@ -2,4 +2,5 @@ confluent-kafka
 kafka-python-ng
 kafka-python
 pyspark
-apache-airflow[celery,spark]
+apache-airflow
+apache-airflow-providers-apache-spark

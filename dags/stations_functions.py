@@ -73,7 +73,6 @@ def get_estimated_timetable(stop_point_ref):
 
     headers = {
         "apikey": "VKl2FLcQCLZXZxJfP65faKkRRxSHWdHX"
-
     }
 
     # Effectuer la requête GET
