@@ -23,7 +23,7 @@ dag = DAG(
     schedule_interval='@once',
 )
 
-start = DummyOperator(task_id='start', dag=dag)
+start = EmptyOperator(task_id='start', dag=dag)
 
 spark_job = SparkSubmitOperator(
     task_id='spark_job',
