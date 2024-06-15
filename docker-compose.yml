@@ -27,6 +27,7 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     - ./jobs:/opt/airflow/jobs
+    - ./hadoop-jar:/opt/bitnami/spark/hadoop-jar
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -375,8 +376,10 @@ services:
       - "8090:8080"
     environment:
       - SPARK_MODE=master
+      - SPARK_EXTRA_CLASSPATH=/opt/bitnami/spark/hadoop-jar/*
     volumes: 
       - ./jobs:/opt/bitnami/spark/jobs
+      - ./hadoop-jar:/opt/bitnami/spark/hadoop-jar
     networks:
       - airflow-kafka
 
@@ -388,8 +391,10 @@ services:
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_EXTRA_CLASSPATH=/opt/bitnami/spark/hadoop-jar/*
     volumes: 
       - ./jobs:/opt/bitnami/spark/jobs
+      - ./hadoop-jar:/opt/bitnami/spark/hadoop-jar
     networks:
       - airflow-kafka
 

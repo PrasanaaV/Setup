@@ -2,7 +2,7 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from stations_functions import fetch_and_insert_into_elasticsearch_emplacement_stations, fetch_and_insert_into_elasticsearch_perim, elastic_metro_station
-# Define the default arguments for the DAG
+
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
@@ -12,36 +12,29 @@ default_args = {
     'retries': 1,
 }
 
-# Define the DAG
 dag = DAG(
-    'my_python_dag',
+    'extraction_loading_es',
     default_args=default_args,
-    description='A simple DAG to execute a Python script',
+    description='Extraction DAG and Loading into ElasticSearch',
     schedule_interval='@once',
 )
 
-# python_task1 = PythonOperator(
-#     task_id='kafka_fct',
-#     python_callable=kafka_fct,
-#     dag=dag,
-# )
-
-python_task2 = PythonOperator(
-    task_id='fetch_and_insert_into_elasticsearch_emplacement_stations',
-    python_callable=fetch_and_insert_into_elasticsearch_emplacement_stations,
-    dag=dag,
-)
-
-python_task3 = PythonOperator(
+python_task1 = PythonOperator(
     task_id='insert_into_elasticsearch_perimetre',
     python_callable=fetch_and_insert_into_elasticsearch_perim,
     dag=dag,
 )
 
-python_task4 = PythonOperator(
-    task_id='elastic_metro_station',
-    python_callable=elastic_metro_station,
-    dag=dag,
-)
+# python_task2 = PythonOperator(
+#     task_id='elastic_metro_station',
+#     python_callable=elastic_metro_station,
+#     dag=dag,
+# )
 
-python_task3 >> python_task2
+# python_task3 = PythonOperator(
+#     task_id='fetch_and_insert_into_elasticsearch_emplacement_stations',
+#     python_callable=fetch_and_insert_into_elasticsearch_emplacement_stations,
+#     dag=dag,
+# )
+
+python_task1
