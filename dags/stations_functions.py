@@ -149,15 +149,16 @@ def insert_into_elasticsearch_perim(content):
         retry_on_timeout=True  # Retry on connection timeout
     )
 
-    lst = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "A", "B", "3B", "7B"]
-   
-    for item in content:
-        if item['name_line'] in lst:
-            unique_id = f"{item['line']}_{item['ns3_stoppointref']}"
-            # Insert the document using the unique identifier
-            client.index(index="perimeter", id=unique_id, body=item)
-    print("New data inserted successfully.")
-    return
+    with open("/opt/airflow/jobs/mapping.json") as f:
+        res = json.load(f)
+        
+        for item in content:
+            if item['line'] in res.values():
+                unique_id = f"{item['line']}_{item['ns3_stoppointref']}"
+                # Insert the document using the unique identifier
+                client.index(index="perimeter", id=unique_id, body=item)
+        print("New data inserted successfully.")
+        return
 
 def fetch_and_insert_into_elasticsearch_perim():
     content = fetch_data_from_json_perim()

@@ -19,7 +19,6 @@ dag = DAG(
     schedule_interval='@once',
 )
 
-
 python_task1 = PythonOperator(
     task_id='insert_into_elasticsearch_perimetre',
     python_callable=fetch_and_insert_into_elasticsearch_perim,

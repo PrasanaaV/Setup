@@ -28,7 +28,7 @@ def get_estimated_timetable(stop_point_ref):
 def kafka_fct():
     es = Elasticsearch(
         "https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443",
-        api_key="UWxrRTdvOEItODFDdXJHT3hHcUQ6Z0FobmRTMVVRcWVud01jbVozREFodw==",
+        api_key="QzFsdkc1QUItODFDdXJHT1FuR2g6ZDNxbWdHVXVSQmFzZlZyYW5qSEw4UQ==",
         timeout=30,           # Connection timeout
         max_retries=3,        # Maximum number of retries on connection failure
         retry_on_timeout=True  # Retry on connection timeout
@@ -39,7 +39,7 @@ def kafka_fct():
         "match_all": {}
         }
     }
-    index_name = "output"
+    index_name = "perimeter"
 
     # Récupérer les documents de l'index
     response = es.search(index=index_name, body=query, size=1000)
@@ -55,7 +55,9 @@ def kafka_fct():
 
         data = get_estimated_timetable(stopref)
         destination_display = data['Siri']['ServiceDelivery']['StopMonitoringDelivery'][0]['MonitoredStopVisit'][0]['MonitoredVehicleJourney']['MonitoredCall']['DestinationDisplay'][0]['value']
+        print(destination_display)
         expected_arrival_time = data['Siri']['ServiceDelivery']['StopMonitoringDelivery'][0]['MonitoredStopVisit'][0]['MonitoredVehicleJourney']['MonitoredCall']['ExpectedArrivalTime']
+        print(expected_arrival_time)
 
         res = dict({"stopRef": {"destination": destination_display,"expected_arrival_time":expected_arrival_time }})
 
@@ -64,8 +66,6 @@ def kafka_fct():
             result_dict[nom] = stopref
 
     # Afficher le dictionnaire résultant
-    print(result_dict)
-
     send(result_dict)
 
 def send(res):
