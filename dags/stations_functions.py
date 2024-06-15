@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import requests
 import time
 import json
-from kafka import KafkaProducer
 from elasticsearch import Elasticsearch
 from airflow.providers.elasticsearch.hooks.elasticsearch import ElasticsearchHook, ElasticsearchSQLHook
 
@@ -11,6 +10,8 @@ def create_info_station():
     numbers = ["ligne" + str(i) for i in range(1,13)]
     numbers.append('lignea')
     numbers.append('ligneb')
+    numbers.append('ligne7bis')
+    numbers.append('ligne3bis')
     lstToAvoid = ['search.php', 'mentions-legales.php', 'le-guichet.php', 'contact.php']
     numberPhp = [number + ".php" for number in numbers]
     lstToAvoid.extend(numberPhp)
@@ -61,71 +62,6 @@ def retrieveInfosSortieMetro(url, number):
             time.sleep(2)
             retrieveInfosSortieMetro(url)
 
-import requests
-import json
-
-def get_estimated_timetable(stop_point_ref):
-    url = "https://prim.iledefrance-mobilites.fr/marketplace/stop-monitoring"
-
-    params = {
-        "MonitoringRef": stop_point_ref
-    }
-
-    headers = {
-        "apikey": "VKl2FLcQCLZXZxJfP65faKkRRxSHWdHX"
-    }
-
-    # Effectuer la requête GET
-    response = requests.get(url, params=params, headers=headers)
-
-    # Vérifier si la requête a réussi
-    if response.status_code == 200:
-        data = response.json()  
-        return data
-    else:
-        print("Failed to fetch data: Status code", response.status_code)
-        return None
-
-def loop_over():
-    with open('dags/files/mapping.json') as file:
-        content = json.load(file)
-    
-    client = Elasticsearch(
-        "https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443",
-        api_key="UWxrRTdvOEItODFDdXJHT3hHcUQ6Z0FobmRTMVVRcWVud01jbVozREFodw==",
-        timeout=30,           # Connection timeout
-        max_retries=3,        # Maximum number of retries on connection failure
-        retry_on_timeout=True  # Retry on connection timeout
-    )
-
-    # Get all documents from index perimetre in Elasticsearch filter by values in content
-    for key, value in content.items():
-        response = client.search(
-            index="perimetre",
-            body={
-                "query": {
-                    "bool": {
-                        "must": [
-                            {"match": {"line": "STIF:Line::C" + str(value)}},
-                        ]
-                    }
-                }
-            }
-        )
-        documents = response['hits']['hits']
-        # To be continued ... 
-
-
-# def kafka_fct():
-#     try:
-#         producer = KafkaProducer(bootstrap_servers=['kafka1:19092'])
-#         producer.send('infosRealTime', json.dumps(res).encode('utf-8'))
-#         producer.flush()  # Ensure all messages are sent before closing
-#         producer.close()
-#         print("Message sent successfully.")
-#     except Exception as e:
-#         print(f"Error sending message: {e}")
-    
 def elastic_metro_station():
     res = create_info_station()
     client = Elasticsearch(
@@ -200,24 +136,26 @@ def fetch_data_from_json_perim():
             }
             simplified_records.append(simplified_record)
 
-    return simplified_records    
+    return simplified_records
     
 
 def insert_into_elasticsearch_perim(content):
     
     client = Elasticsearch(
         "https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443",
-        api_key="UWxrRTdvOEItODFDdXJHT3hHcUQ6Z0FobmRTMVVRcWVud01jbVozREFodw==",
+        api_key="QzFsdkc1QUItODFDdXJHT1FuR2g6ZDNxbWdHVXVSQmFzZlZyYW5qSEw4UQ==",
         timeout=30,           # Connection timeout
         max_retries=3,        # Maximum number of retries on connection failure
         retry_on_timeout=True  # Retry on connection timeout
     )
-    
+
+    lst = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "A", "B", "3B", "7B"]
+   
     for item in content:
-        unique_id = f"{item['line']}_{item['ns3_stoppointref']}"
-    
-        # Insert the document using the unique identifier
-        client.index(index="perimetre", id=unique_id, body=item)
+        if item['name_line'] in lst:
+            unique_id = f"{item['line']}_{item['ns3_stoppointref']}"
+            # Insert the document using the unique identifier
+            client.index(index="perimeter", id=unique_id, body=item)
     print("New data inserted successfully.")
     return
 
