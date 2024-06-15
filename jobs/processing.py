@@ -1,9 +1,8 @@
 from elasticsearch import Elasticsearch
-from pyspark.sql import SparkSession, Row
+from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, lit, when
-from pyspark.sql.types import StringType
-import pandas as pd
 from elasticsearch.helpers import scan
+import pandas as pd
 from confluent_kafka import Consumer, KafkaException, KafkaError
 import json
 
@@ -46,34 +45,62 @@ def elasticsearch_query(es_client, index, query, field):
     results = scan(es_client, index=index, query=body)
     return [hit["_source"] for hit in results]
 
-es = Elasticsearch(
-        "https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443",
-        api_key=api_key_metro_station
-    )
+metro_station_es = Elasticsearch(
+    "https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443",
+    api_key=api_key_metro_station
+)
+
+emplacement_stations_idf_es = Elasticsearch(
+    "https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443",
+    api_key=api_key_emplacement_stations_idf
+)
 
 # Extraction des noms d'arrêts de perimeter_df
-stopnames_list = perimeter_df.select('ns3_stopname').rdd.flatMap(lambda x: x).collect()
+stopnames_list = perimeter_df.select('ns3_stopname').distinct().rdd.flatMap(lambda x: x).collect()
 
-# Ajouter les colonnes supplémentaires au DataFrame
-for col_name in ["maps", "longitude", "latitude"] + [str(i) for i in range(1, 10)]:
-    perimeter_df = perimeter_df.withColumn(col_name, lit(None).cast(StringType()))
-
-# Interrogation d'Elasticsearch et mise à jour de perimeter_df
-for element in stopnames_list[:50]:
+# Batch process Elasticsearch queries
+metro_station_results = {}
+for element in stopnames_list:
     try:
-        metro_station_output = elasticsearch_query(es, "metro_station", element, "nom")[0]
-        maps_value = metro_station_output.get("maps")
-        additional_columns = {str(i): metro_station_output.get(str(i)) for i in range(1, 10)}
-
-        # Mise à jour du DataFrame
-        perimeter_df = perimeter_df.withColumn("maps", 
-                                               when(col("ns3_stopname") == element, lit(maps_value)).otherwise(col("maps")))
-        for col_name, col_value in additional_columns.items():
-            perimeter_df = perimeter_df.withColumn(col_name, 
-                                                   when(col("ns3_stopname") == element, lit(col_value)).otherwise(col(col_name)))
-
+        metro_station_results[element] = elasticsearch_query(metro_station_es, "metro_station", element, "nom")[0]
     except Exception as e:
         print(f"Error processing element {element}: {e}")
+
+# Create Spark DataFrame
+columns = ["ns3_stopname", "maps"] + [str(i) for i in range(1, 10)]
+metro_station_updates = [
+    (k, v.get("maps"), *[v.get(str(i)) for i in range(1, 10)]) 
+    for k, v in metro_station_results.items()
+]
+metro_station_df = spark.createDataFrame(metro_station_updates, columns)
+
+# Batch process Elasticsearch queries for the second table
+emplacement_stations_idf_results = {}
+for element in stopnames_list:
+    try:
+        result = elasticsearch_query(emplacement_stations_idf_es, "emplacement-stations-idf", element, "nom_gares")[0]
+        emplacement_stations_idf_results[element] = result
+    except Exception as e:
+        print(f"Error processing element {element}: {e}")
+
+# Create Spark DataFrame
+columns = ["ns3_stopname", "longitude", "latitude"]
+emplacement_stations_idf_updates = [
+    (k, v.get("longitude"), v.get("latitude"))
+    for k, v in emplacement_stations_idf_results.items()
+]
+
+emplacement_stations_idf_df = spark.createDataFrame(emplacement_stations_idf_updates, columns)
+
+# Join the updates with the original DataFrame
+perimeter_df = perimeter_df.join(metro_station_df, on="ns3_stopname", how="left") \
+                           .join(emplacement_stations_idf_df, on="ns3_stopname", how="left")
+
+# Afficher les lignes contenant des valeurs nulles
+# null_rows_df = perimeter_df.filter(col("maps").isNull() | col("longitude").isNull())
+# null_rows_df.show()
+
+# perimeter_df.show(len(stopnames_list), truncate=False)
 
 
 def get_last_message_with_key():
