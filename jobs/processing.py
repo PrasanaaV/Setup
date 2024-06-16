@@ -112,11 +112,29 @@ clean_index_es = Elasticsearch(
     api_key=api_key_clean_index
 )
 
+# Définir le mapping avec un champ géospatial
+mapping = {
+    "mappings": {
+        "properties": {
+            "location": {
+                "type": "geo_point"
+            }
+        }
+    }
+}
+
+
+
 # Fonction pour exclure les champs avec des valeurs nulles d'une ligne et ajouter des champs supplémentaires
 def exclude_nulls_and_add_fields(row):
     clean_row = {k: v for k, v in row.asDict().items() if v is not None}
-    clean_row['destination'] = None
-    clean_row['waiting_time'] = None
+    clean_row['destination'] = "N/A"
+    clean_row['waiting_time'] = -1
+    if 'latitude' in clean_row and 'longitude' in clean_row:
+        clean_row['location'] = {
+            "lat": clean_row.pop('latitude'),
+            "lon": clean_row.pop('longitude')
+        }
     return clean_row
 
 # Appliquer la fonction pour exclure les valeurs nulles de chaque ligne et ajouter les nouveaux champs
