@@ -377,6 +377,8 @@ services:
     environment:
       - SPARK_MODE=master
       - SPARK_EXTRA_CLASSPATH=/opt/bitnami/spark/hadoop-jar/*
+      - PYSPARK_PYTHON=/opt/bitnami/python/bin/python3
+      - PYSPARK_DRIVER_PYTHON=/opt/bitnami/python/bin/python3
     volumes: 
       - ./jobs:/opt/bitnami/spark/jobs
       - ./hadoop-jar:/opt/bitnami/spark/hadoop-jar
@@ -392,6 +394,8 @@ services:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
       - SPARK_EXTRA_CLASSPATH=/opt/bitnami/spark/hadoop-jar/*
+      - PYSPARK_PYTHON=/opt/bitnami/python/bin/python3
+      - PYSPARK_DRIVER_PYTHON=/opt/bitnami/python/bin/python3
     volumes: 
       - ./jobs:/opt/bitnami/spark/jobs
       - ./hadoop-jar:/opt/bitnami/spark/hadoop-jar

@@ -25,16 +25,16 @@ python_task1 = PythonOperator(
     dag=dag,
 )
 
-# python_task2 = PythonOperator(
-#     task_id='elastic_metro_station',
-#     python_callable=elastic_metro_station,
-#     dag=dag,
-# )
+python_task2 = PythonOperator(
+    task_id='elastic_metro_station',
+    python_callable=elastic_metro_station,
+    dag=dag,
+)
 
-# python_task3 = PythonOperator(
-#     task_id='fetch_and_insert_into_elasticsearch_emplacement_stations',
-#     python_callable=fetch_and_insert_into_elasticsearch_emplacement_stations,
-#     dag=dag,
-# )
+python_task3 = PythonOperator(
+    task_id='fetch_and_insert_into_elasticsearch_emplacement_stations',
+    python_callable=fetch_and_insert_into_elasticsearch_emplacement_stations,
+    dag=dag,
+)
 
-python_task1
+python_task1 >> python_task2 >> python_task3

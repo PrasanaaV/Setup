@@ -18,12 +18,17 @@ dag = DAG('preprocessing',
           start_date=datetime(2024, 5, 3),
           catchup=False)
 
-# Define the SparkSubmitOperator
-spark_submit_task = SparkSubmitOperator(
+spark_submit_task1 = SparkSubmitOperator(
     application='jobs/processing.py',
     conn_id='spark-conn',
     task_id='spark',
 )
 
+spark_submit_task2 = SparkSubmitOperator(
+    application='jobs/kafka_watch.py',
+    conn_id='spark-conn',
+    task_id='spark',
+)
+
 start = EmptyOperator(task_id='start', dag=dag)
-start >> spark_submit_task
+start >> spark_submit_task1

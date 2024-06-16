@@ -2,6 +2,7 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from kafka_functions import kafka_fct
+from datetime import datetime, timedelta
 
 # Define the default arguments for the DAG
 default_args = {
@@ -18,7 +19,7 @@ dag = DAG(
     'kafka_dag',
     default_args=default_args,
     description='Extraction DAG and send to Kafka (RealTime)',
-    schedule_interval='@once',
+    schedule_interval=timedelta(minutes=5),
 )
 
 python_task1 = PythonOperator(

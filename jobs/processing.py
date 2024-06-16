@@ -3,7 +3,10 @@ from elasticsearch.helpers import scan
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 import pandas as pd
+from confluent_kafka import Consumer, KafkaException, KafkaError
+from kafka import KafkaConsumer
 import json
+import os
 
 # Créer une session Spark
 spark = SparkSession.builder \
@@ -31,6 +34,8 @@ query = {
     },
     "size": 1000
 }
+
+
 res = es.search(index="perimeter", body=query)
 data = [hit['_source'] for hit in res['hits']['hits']]
 df_pd = pd.DataFrame(data)
@@ -80,7 +85,6 @@ metro_station_updates = [
 ]
 metro_station_df = spark.createDataFrame(metro_station_updates, columns)
 
-print("step 1/2")
 
 # Batch process Elasticsearch queries for the second table
 emplacement_stations_idf_results = {}
@@ -105,47 +109,3 @@ print("step 2/2")
 # Join the updates with the original DataFrame
 perimeter_df = perimeter_df.join(metro_station_df, on="ns3_stopname", how="left") \
                            .join(emplacement_stations_idf_df, on="ns3_stopname", how="left")
-
-
-clean_index_es = Elasticsearch(
-    elasticsearch_endpoint,
-    api_key=api_key_clean_index
-)
-
-# Définir le mapping avec un champ géospatial
-mapping = {
-    "mappings": {
-        "properties": {
-            "location": {
-                "type": "geo_point"
-            }
-        }
-    }
-}
-
-
-
-# Fonction pour exclure les champs avec des valeurs nulles d'une ligne et ajouter des champs supplémentaires
-def exclude_nulls_and_add_fields(row):
-    clean_row = {k: v for k, v in row.asDict().items() if v is not None}
-    clean_row['destination'] = "N/A"
-    clean_row['waiting_time'] = -1
-    if 'latitude' in clean_row and 'longitude' in clean_row:
-        clean_row['location'] = {
-            "lat": clean_row.pop('latitude'),
-            "lon": clean_row.pop('longitude')
-        }
-    return clean_row
-
-# Appliquer la fonction pour exclure les valeurs nulles de chaque ligne et ajouter les nouveaux champs
-rdd = perimeter_df.rdd.map(exclude_nulls_and_add_fields)
-
-print("Writing to clean_index in elasticsearch")
-print("This may take a few minutes")
-# Convertir chaque ligne nettoyée en JSON et envoyer à Elasticsearch
-for clean_document in rdd.collect():
-    clean_index_es.index(index="clean_index", body=json.dumps(clean_document))
-
-print("End of the process")
-
-spark.stop()
