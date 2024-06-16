@@ -13,7 +13,7 @@ default_args = {
 }
 
 dag = DAG(
-    'extraction_loading_es',
+    'etl',
     default_args=default_args,
     description='Extraction DAG and Loading into ElasticSearch',
     schedule_interval='@once',

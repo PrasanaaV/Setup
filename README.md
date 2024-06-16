@@ -1,0 +1,1 @@
+docker build . -f Dockerfile --pull --tag apache/airflow:2.7.1
