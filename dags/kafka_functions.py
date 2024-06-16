@@ -1,79 +1,60 @@
 from kafka import KafkaProducer
 import json
-from elasticsearch import Elasticsearch
 import requests
 
-def get_estimated_timetable(stop_point_ref):
-    url = "https://prim.iledefrance-mobilites.fr/marketplace/stop-monitoring"
+def realTime(LineRef):
+    # URL de l'API
+    url = "https://prim.iledefrance-mobilites.fr/marketplace/estimated-timetable"
+
+    # Votre clé API
+    api_key = "VKl2FLcQCLZXZxJfP65faKkRRxSHWdHX"
+
+    # En-têtes de la requête
+    headers = {
+        "apikey": api_key
+    }
 
     params = {
-        "MonitoringRef": stop_point_ref
+        "LineRef": LineRef  # Vous pouvez changer cette valeur en fonction de la ligne que vous souhaitez interroger
     }
 
-    headers = {
-        "apikey": "VKl2FLcQCLZXZxJfP65faKkRRxSHWdHX"
-    }
+    response = requests.get(url, headers=headers, params=params)
 
-    # Effectuer la requête GET
-    response = requests.get(url, params=params, headers=headers)
-
-    # Vérifier si la requête a réussi
     if response.status_code == 200:
-        data = response.json()  
-        return data
-    else:
-        print("Failed to fetch data: Status code", response.status_code)
-        return None
+        return response.json()
 
-def kafka_fct():
-    es = Elasticsearch(
-        "https://7f0ef8badf50482b9b0d93ef141e14ec.us-central1.gcp.cloud.es.io:443",
-        api_key="QzFsdkc1QUItODFDdXJHT1FuR2g6ZDNxbWdHVXVSQmFzZlZyYW5qSEw4UQ==",
-        timeout=30,           # Connection timeout
-        max_retries=3,        # Maximum number of retries on connection failure
-        retry_on_timeout=True  # Retry on connection timeout
-    )
+def extract_info(data):
+    extracted_info = []
+    for delivery in data['Siri']['ServiceDelivery']['EstimatedTimetableDelivery']:
+        for frame in delivery['EstimatedJourneyVersionFrame']:
+            for journey in frame['EstimatedVehicleJourney']:
+                for call in journey['EstimatedCalls']['EstimatedCall']:
+                    key = call['StopPointRef']['value']
+                    info ={'ExpectedArrivalTime': call.get('ExpectedArrivalTime', 'N/A'), 
+                             'DestinationDisplay' : call['DestinationDisplay'][0]['value'] 
+                                if 'DestinationDisplay' in call and call['DestinationDisplay'] 
+                                else 'N/A'
+                            }
+                    extracted_info.append((key,info))
+    return extracted_info
 
-    query = {
-    "query": {
-        "match_all": {}
-        }
-    }
-    index_name = "perimeter"
-
-    # Récupérer les documents de l'index
-    response = es.search(index=index_name, body=query, size=1000)
-
-    # Initialiser un dictionnaire pour stocker les résultats
-    result_dict = {}
-
-    # Parcourir les hits (documents) retournés par la requête
-    for hit in response['hits']['hits']:
-        # Extraire les champs nom et stopref de chaque document
-        nom = hit['_source'].get('nom')
-        stopref = hit['_source'].get('stopref')
-
-        data = get_estimated_timetable(stopref)
-        destination_display = data['Siri']['ServiceDelivery']['StopMonitoringDelivery'][0]['MonitoredStopVisit'][0]['MonitoredVehicleJourney']['MonitoredCall']['DestinationDisplay'][0]['value']
-        print(destination_display)
-        expected_arrival_time = data['Siri']['ServiceDelivery']['StopMonitoringDelivery'][0]['MonitoredStopVisit'][0]['MonitoredVehicleJourney']['MonitoredCall']['ExpectedArrivalTime']
-        print(expected_arrival_time)
-
-        res = dict({"stopRef": {"destination": destination_display,"expected_arrival_time":expected_arrival_time }})
-
-        # Ajouter les données au dictionnaire
-        if nom is not None and stopref is not None:
-            result_dict[nom] = stopref
-
-    # Afficher le dictionnaire résultant
-    send(result_dict)
-
-def send(res):
+def send(key, value, producer):
     try:
-        producer = KafkaProducer(bootstrap_servers=['kafka1:19092'])
-        producer.send('infosRealTime', json.dumps(res).encode('utf-8'))
-        producer.flush()  # Ensure all messages are sent before closing
-        producer.close()
+        producer.send('infosRealTime', key=key, value=value)
         print("Message sent successfully.")
     except Exception as e:
         print(f"Error sending message: {e}")
+
+def kafka_fct():
+    producer = KafkaProducer(bootstrap_servers=['kafka1:19092'])
+    with open('jobs/mapping.json') as f:
+        f = json.load(f)
+        lstMapping = f.values()
+        for station in lstMapping:
+            res = realTime(station)
+            lst = extract_info(res)
+            for element in lst:
+                key, value = element
+                send(key, value, producer)
+    producer.flush()  # Ensure all messages are sent before closing
+    producer.close()
