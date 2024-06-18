@@ -31,4 +31,4 @@ spark_submit_task2 = SparkSubmitOperator(
 )
 
 start = EmptyOperator(task_id='start', dag=dag)
-start >> spark_submit_task1
+start >> spark_submit_task1 >> spark_submit_task2

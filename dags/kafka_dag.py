@@ -27,3 +27,5 @@ python_task1 = PythonOperator(
     python_callable=kafka_fct,
     dag=dag,
 )
+
+python_task1
